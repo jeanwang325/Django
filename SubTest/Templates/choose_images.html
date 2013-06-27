@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Choose Group{% endblock %}
+
+{% block content %}
+<div>
+<h1>Choose Image Group </h1>
+<h3>Please choose one group of images.</h3>
+<form action="/choose_images/" method="post">{% csrf_token %}
+
+{% for cnt in tag %}
+<!-- <input type="text" value = {{cnt}} name="answer"> -->
+
+<input type="submit" value={{cnt}} name="img_group">
+<br>
+{% endfor %}
+<p>Your rank is: {{ group }}</p>
+</form>
+</div>
+{% endblock %}

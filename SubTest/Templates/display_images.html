@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} Show Image{% endblock %}
+
+{% block content %}
+<div>
+<h1>Choose Image Group </h1>
+<h3>Please choose one group of images.</h3>
+<form action="/display_images/" method="get">{% csrf_token %}
+
+{% for cnt in tag %}
+<!-- <input type="text" value = {{cnt}} name="answer"> -->
+
+<input type="submit" value={{cnt}} name="img_group">
+{% endfor %}
+</form>
+</div>
+
+<div>
+<h1>Show Image </h1>
+
+<h3>Please rank the following three images according to the dominant color percentage (1-highest, 3-lowest), and click continue </h3>
+<form action="/display_images/" method="post" >{% csrf_token %}
+<table>
+{% for image in images %}
+<tr>
+<td>
+<img id = {{image}} src={{STATIC_URL}}{{image}}>
+</td>
+<td>
+<input id = {{image}} type="number" value = "1" name="answer[]">
+</td>
+</tr>
+{% endfor %}
+<input type="hidden" value = {{ss}} name="section">
+</table>
+<input type="submit" value="Continue">
+</form>
+</div>
+{% endblock %}
